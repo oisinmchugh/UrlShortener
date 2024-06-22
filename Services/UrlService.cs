@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using UrlShortener.Models;
-using UrlShortener.Repositories;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace UrlShortener.Services
 {

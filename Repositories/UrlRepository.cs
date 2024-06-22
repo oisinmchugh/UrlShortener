@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UrlShortener.Data;
 using UrlShortener.Models;
-using System.Threading.Tasks;
 
 namespace UrlShortener.Repositories
 {

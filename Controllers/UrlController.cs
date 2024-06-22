@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UrlShortener.Models;
 using UrlShortener.Services;
 using UrlShortener.Validation;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace UrlShortener.Services
+﻿namespace UrlShortener.Services
 {
     /// <summary>
     /// Represents errors that occur during URL shortening operations.
