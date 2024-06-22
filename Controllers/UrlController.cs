@@ -32,10 +32,19 @@ namespace UrlShortener.Controllers
             return Ok(new { ShortenedUrl = shortenedUrl });
         }
 
-        [HttpGet("{shortenedUrl}")]
-        public async Task<IActionResult> GetOriginalUrlAsync(string shortenedUrl)
+        [HttpGet("original url")]
+        public async Task<IActionResult> GetOriginalUrlAsync(string fullUrl)
         {
-            var originalUrl = await _urlService.GetOriginalUrlAsync(shortenedUrl);
+            if (string.IsNullOrEmpty(fullUrl))
+            {
+                return BadRequest($"{nameof(fullUrl)} is required.");
+            }
+
+            var urlLegnth = fullUrl.Length;
+            var shortUrlCode = fullUrl.Substring(urlLegnth -8, 8);   
+
+            //var shortenedUrl = fullUrl.TakeLast(8).ToString();
+            var originalUrl = await _urlService.GetOriginalUrlFromShortenedAsync(shortUrlCode);
             if (originalUrl == null)
             {
                 return NotFound();
@@ -46,7 +55,7 @@ namespace UrlShortener.Controllers
         [HttpGet("r/{shortenedUrl}")]
         public async Task<IActionResult> RedirectToOriginalUrlAsync(string shortenedUrl)
         {
-            var originalUrl = await _urlService.GetOriginalUrlAsync(shortenedUrl);
+            var originalUrl = await _urlService.GetOriginalUrlFromShortenedAsync(shortenedUrl);
             if (originalUrl == null)
             {
                 return NotFound();

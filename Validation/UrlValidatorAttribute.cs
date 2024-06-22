@@ -1,21 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 
 namespace UrlShortener.Validation
 {
     public class UrlValidatorAttribute : ValidationAttribute
     {
-        public override bool IsValid(object value)
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value == null || !(value is string url))
+            var url = value as string;
+            if (string.IsNullOrEmpty(url))
             {
-                return false;
+                return new ValidationResult("URL is required.");
             }
 
-            // Regular expression to validate a URL
-            var regex = new Regex(@"^(https?|ftp)://[^\s/$.?#].[^\s]*$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            // Validate the URL format
+            if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
+            {
+                return new ValidationResult("Invalid URL format.");
+            }
 
-            return regex.IsMatch(url);
+            return ValidationResult.Success;
         }
     }
 }

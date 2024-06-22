@@ -13,17 +13,17 @@ namespace UrlShortener.Repositories
             _context = context;
         }
 
-        public async Task<Url> GetByOriginalUrlAsync(string originalUrl)
+        public async Task<Url> GetOriginalUrlByOriginalUrlAsync(string originalUrl)
         {
             return await _context.Urls.FirstOrDefaultAsync(u => u.OriginalUrl == originalUrl);
         }
 
-        public async Task<Url> GetByShortenedUrlAsync(string shortenedUrl)
+        public async Task<Url> GetShortenedUrlByShortenedUrlAsync(string shortenedUrl)
         {
             return await _context.Urls.FirstOrDefaultAsync(u => u.ShortenedUrl == shortenedUrl);
         }
 
-        public async Task<bool> ExistsByShortenedUrlAsync(string shortenedUrl)
+        public async Task<bool> CheckShortenedUrlExistsAsync(string shortenedUrl)
         {
             return await _context.Urls.AnyAsync(u => u.ShortenedUrl == shortenedUrl);
         }

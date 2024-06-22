@@ -3,6 +3,6 @@
     public interface IUrlService
     {
         Task<string> ShortenUrlAsync(string originalUrl);
-        Task<string> GetOriginalUrlAsync(string shortenedUrl);
+        Task<string> GetOriginalUrlFromShortenedAsync(string shortenedUrl);
     }
 }

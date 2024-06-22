@@ -2,9 +2,9 @@
 
 public interface IUrlRepository
 {
-    Task<Url> GetByOriginalUrlAsync(string originalUrl);
-    Task<Url> GetByShortenedUrlAsync(string shortenedUrl);
-    Task<bool> ExistsByShortenedUrlAsync(string shortenedUrl);
+    Task<Url> GetOriginalUrlByOriginalUrlAsync(string originalUrl);
+    Task<Url> GetShortenedUrlByShortenedUrlAsync(string shortenedUrl);
+    Task<bool> CheckShortenedUrlExistsAsync(string shortenedUrl);
     void Add(Url url);
     Task SaveChangesAsync();
 }

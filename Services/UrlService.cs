@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UrlShortener.Models;
 
-
 namespace UrlShortener.Services
 {
     public class UrlService : IUrlService
@@ -9,7 +8,8 @@ namespace UrlShortener.Services
         private readonly IUrlRepository _urlRepository;
         private readonly ILogger<UrlService> _logger;
 
-        private const int retryLimit = 2;
+        private const int RetryLimit = 2;
+        private static readonly TimeSpan InitialDelay = TimeSpan.FromSeconds(2);
 
         public UrlService(IUrlRepository urlRepository, ILogger<UrlService> logger)
         {
@@ -19,26 +19,29 @@ namespace UrlShortener.Services
 
         public async Task<string> ShortenUrlAsync(string originalUrl)
         {
-            var existingUrl = await GetExistingShortenedUrlAsync(originalUrl);
-            if (existingUrl != null)
+            // Check if the original URL has already been shortened
+            var existingShortUrl = await CheckIfUrlHasBeenShortened(originalUrl);
+            if (existingShortUrl != null)
             {
-                return existingUrl;
+                // Return the pre-existing shortened URL, don't generate a new one
+                return existingShortUrl;
             }
 
             var shortenedUrl = await GenerateUniqueShortUrlAsync();
-
-            return await SaveUrlAsync(originalUrl, shortenedUrl);
+            return await SaveUrlWithRetriesAsync(originalUrl, shortenedUrl);
         }
 
-        public async Task<string> GetOriginalUrlAsync(string shortenedUrl)
+        public async Task<string> GetOriginalUrlFromShortenedAsync(string shortenedUrl)
         {
-            var url = await _urlRepository.GetByShortenedUrlAsync(shortenedUrl);
+            //Searches DB for a short URL, checks if it exists, if it does, returns the original url that matches the short url
+            var url = await _urlRepository.GetShortenedUrlByShortenedUrlAsync(shortenedUrl);
             return url?.OriginalUrl;
         }
 
-        private async Task<string> GetExistingShortenedUrlAsync(string originalUrl)
+        private async Task<string> CheckIfUrlHasBeenShortened(string originalUrl)
         {
-            var urlEntry = await _urlRepository.GetByOriginalUrlAsync(originalUrl);
+            //Searches DB for original URL, checks if a short version exists, if it does, returns the short version
+            var urlEntry = await _urlRepository.GetOriginalUrlByOriginalUrlAsync(originalUrl);
             return urlEntry?.ShortenedUrl;
         }
 
@@ -47,18 +50,13 @@ namespace UrlShortener.Services
             string shortenedUrl;
             do
             {
-                shortenedUrl = GenerateShortUrl();
-            } while (await _urlRepository.ExistsByShortenedUrlAsync(shortenedUrl));
+                shortenedUrl = Guid.NewGuid().ToString("N").Substring(0, 8);
+            } while (await _urlRepository.CheckShortenedUrlExistsAsync(shortenedUrl));
 
             return shortenedUrl;
         }
 
-        private string GenerateShortUrl()
-        {
-            return Guid.NewGuid().ToString("N").Substring(0, 8);
-        }
-
-        private async Task<string> SaveUrlAsync(string originalUrl, string shortenedUrl)
+        private async Task<string> SaveUrlWithRetriesAsync(string originalUrl, string shortenedUrl)
         {
             var url = new Url
             {
@@ -68,13 +66,13 @@ namespace UrlShortener.Services
 
             _urlRepository.Add(url);
 
-            for (int attempt = 0; attempt < retryLimit; attempt++)
+            for (int attempt = 0; attempt < RetryLimit; attempt++)
             {
                 if (await TrySaveChangesAsync(originalUrl, attempt))
                 {
                     return shortenedUrl;
                 }
-                await Task.Delay(TimeSpan.FromSeconds(2));
+                await Task.Delay(ExponentialBackoff(attempt));
             }
 
             _logger.LogError("Error saving URL '{OriginalUrl}' to database after multiple attempts.", originalUrl);
@@ -91,12 +89,17 @@ namespace UrlShortener.Services
             catch (DbUpdateException ex)
             {
                 _logger.LogError(ex, "Error saving URL '{OriginalUrl}' to database. Attempt {Attempt}. Error: {ErrorMessage}", originalUrl, attempt + 1, ex.Message);
-                if (attempt == retryLimit - 1)
+                if (attempt == RetryLimit - 1)
                 {
                     _logger.LogError("Max retry attempts reached for URL '{OriginalUrl}'. Unable to save URL to database.", originalUrl);
                 }
                 return false;
             }
+        }
+
+        private static TimeSpan ExponentialBackoff(int attempt)
+        {
+            return TimeSpan.FromSeconds(Math.Pow(2, attempt)) + InitialDelay;
         }
     }
 }
