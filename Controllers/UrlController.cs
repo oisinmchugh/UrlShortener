@@ -17,11 +17,11 @@ namespace UrlShortener.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ShortenUrl([FromBody][UrlValidator] string originalUrl)
+        public async Task<IActionResult> ShortenUrlAsync([FromBody][UrlValidator] string originalUrl)
         {
             if (string.IsNullOrEmpty(originalUrl))
             {
-                return BadRequest("OriginalUrl is required.");
+                return BadRequest($"{nameof(originalUrl)} is required.");
             }
 
             if (!ModelState.IsValid)
@@ -34,7 +34,7 @@ namespace UrlShortener.Controllers
         }
 
         [HttpGet("{shortenedUrl}")]
-        public async Task<IActionResult> GetOriginalUrl(string shortenedUrl)
+        public async Task<IActionResult> GetOriginalUrlAsync(string shortenedUrl)
         {
             var originalUrl = await _urlService.GetOriginalUrlAsync(shortenedUrl);
             if (originalUrl == null)
@@ -45,7 +45,7 @@ namespace UrlShortener.Controllers
         }
 
         [HttpGet("r/{shortenedUrl}")]
-        public async Task<IActionResult> RedirectToOriginalUrl(string shortenedUrl)
+        public async Task<IActionResult> RedirectToOriginalUrlAsync(string shortenedUrl)
         {
             var originalUrl = await _urlService.GetOriginalUrlAsync(shortenedUrl);
             if (originalUrl == null)

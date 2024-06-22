@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using UrlShortener.Data;
 using UrlShortener.Services;
 using Microsoft.OpenApi.Models;
+using UrlShortener.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<IUrlRepository, UrlRepository>();
 builder.Services.AddScoped<IUrlService, UrlService>();
 
 var app = builder.Build();
