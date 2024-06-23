@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace UrlShortener.Validation
+﻿namespace UrlShortener.Validation
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class UrlValidatorAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)

@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using UrlShortener.Data;
-using UrlShortener.Models;
-
-namespace UrlShortener.Repositories
+﻿namespace UrlShortener.Repositories
 {
+    using Microsoft.EntityFrameworkCore;
+    using UrlShortener.Data;
+    using UrlShortener.Models;
+
     public class UrlRepository : IUrlRepository
     {
         private readonly AppDbContext _context;

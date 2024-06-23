@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using UrlShortener.Models;
-
-namespace UrlShortener.Services
+﻿namespace UrlShortener.Services
 {
+    using Microsoft.EntityFrameworkCore;
+    using UrlShortener.Models;
+    using UrlShortener.Repositories;
+
     public class UrlService : IUrlService
     {
         private readonly IUrlRepository _urlRepository;

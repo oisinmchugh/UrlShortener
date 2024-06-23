@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using UrlShortener.Models;
-
-namespace UrlShortener.Data
+﻿namespace UrlShortener.Data
 {
+    using Microsoft.EntityFrameworkCore;
+    using UrlShortener.Models;
+
     public class AppDbContext : DbContext
     {
         public DbSet<Url> Urls { get; set; }

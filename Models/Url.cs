@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace UrlShortener.Models
+﻿namespace UrlShortener.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class Url
     {
         public int Id { get; set; }

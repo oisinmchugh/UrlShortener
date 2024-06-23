@@ -1,10 +1,13 @@
-﻿using UrlShortener.Models;
-
-public interface IUrlRepository
+﻿namespace UrlShortener.Repositories
 {
-    Task<Url> GetOriginalUrlByOriginalUrlAsync(string originalUrl);
-    Task<Url> GetShortenedUrlByShortenedUrlAsync(string shortenedUrl);
-    Task<bool> CheckShortenedUrlExistsAsync(string shortenedUrl);
-    void Add(Url url);
-    Task SaveChangesAsync();
+    using UrlShortener.Models;
+
+    public interface IUrlRepository
+    {
+        Task<Url> GetOriginalUrlByOriginalUrlAsync(string originalUrl);
+        Task<Url> GetShortenedUrlByShortenedUrlAsync(string shortenedUrl);
+        Task<bool> CheckShortenedUrlExistsAsync(string shortenedUrl);
+        void Add(Url url);
+        Task SaveChangesAsync();
+    }
 }

@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using UrlShortener.Services;
-using UrlShortener.Validation;
-
-namespace UrlShortener.Controllers
+﻿namespace UrlShortener.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using UrlShortener.Services;
+    using UrlShortener.Validation;
+
     [ApiController]
     [Route("[controller]")]
     public class UrlController : ControllerBase
@@ -40,8 +40,8 @@ namespace UrlShortener.Controllers
                 return BadRequest($"{nameof(fullUrl)} is required.");
             }
 
-            var urlLegnth = fullUrl.Length;
-            var shortUrlCode = fullUrl.Substring(urlLegnth -8, 8);   
+            // Getting the short url code from the entire URL
+            var shortUrlCode = GetShortUrl(fullUrl);
 
             var originalUrl = await _urlService.GetOriginalUrlFromShortenedAsync(shortUrlCode);
             if (originalUrl == null)
@@ -60,6 +60,13 @@ namespace UrlShortener.Controllers
                 return NotFound();
             }
             return Redirect(originalUrl);
+        }
+
+        private string GetShortUrl(string fullUrl)
+        {
+            var urlLegnth = fullUrl.Length;
+            var shortUrlCode = fullUrl.Substring(urlLegnth - 8, 8);
+            return shortUrlCode;
         }
     }
 }
