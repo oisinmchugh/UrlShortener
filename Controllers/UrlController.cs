@@ -32,7 +32,7 @@ namespace UrlShortener.Controllers
             return Ok(new { ShortenedUrl = shortenedUrl });
         }
 
-        [HttpGet("original url")]
+        [HttpGet("originalUrl")]
         public async Task<IActionResult> GetOriginalUrlAsync(string fullUrl)
         {
             if (string.IsNullOrEmpty(fullUrl))
