@@ -20,3 +20,28 @@ GET/Url/r/originalUrl - Used to a shortenedUrl code (that has been generated POS
 - DI
 - Custom Validation
 - Custom Exception
+
+
+Test Plan: 
+---
+
+- Unit Tests 
+cover all public methods
+coverage can be tested and increased down the line
+
+- Smoke Tests 
+
+- UAT 
+
+- Component Tests 
+test how different classes work together eg Services and Validation
+
+- CI/CD Pipeline could be set up using Jenkins/Bamboo 
+
+- Manual Tests could be defined on Test Rail
+
+- Automated UI tests using selenium or similar tool
+
+- Performance testing could be carried out 
+
+- Canary(staged release) Deployment could be implemented monitoring logs for errors
