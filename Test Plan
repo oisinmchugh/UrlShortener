@@ -1,0 +1,18 @@
+Test Plan: 
+___
+
+- Unit Tests 
+cover all public methods
+coverage can be tested and increased down the line
+
+- Smoke Tests 
+
+- UAT 
+
+- Component Tests
+
+- CI/CD Pipeline could be set up using Jenkins/Bamboo 
+
+- Manual Tests could be defined on Test Rail
+
+- Canary(staged release) Deployment could be implemented monitoring logs for errors
