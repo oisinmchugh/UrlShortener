@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="UrlTests\bin\**" />
+    <Compile Remove="UrlTests\obj\**" />
+    <Content Remove="UrlTests\bin\**" />
+    <Content Remove="UrlTests\obj\**" />
+    <EmbeddedResource Remove="UrlTests\bin\**" />
+    <EmbeddedResource Remove="UrlTests\obj\**" />
+    <None Remove="UrlTests\bin\**" />
+    <None Remove="UrlTests\obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.6" />
