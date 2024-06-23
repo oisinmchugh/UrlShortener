@@ -18,6 +18,19 @@
                 return new ValidationResult("Invalid URL format.");
             }
 
+            try
+            {
+                var uri = new Uri(url);
+                if (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps)
+                {
+                    return new ValidationResult("Invalid URL format.");
+                }
+            }
+            catch
+            {
+                return new ValidationResult("Invalid URL format.");
+            }
+
             return ValidationResult.Success;
         }
     }

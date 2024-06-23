@@ -28,7 +28,7 @@
             return await _context.Urls.AnyAsync(u => u.ShortenedUrl == shortenedUrl);
         }
 
-        public void Add(Url url)
+        public async Task Add(Url url)
         {
             _context.Urls.Add(url);
         }

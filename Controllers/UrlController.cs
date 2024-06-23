@@ -32,6 +32,7 @@
             return Ok(new { ShortenedUrl = shortenedUrl });
         }
 
+        // This is included as a potenial security feature to allow users to reverse check a shortened URL
         [HttpGet("originalUrl")]
         public async Task<IActionResult> GetOriginalUrlAsync(string fullUrl)
         {
