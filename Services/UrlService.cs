@@ -1,6 +1,7 @@
 ﻿namespace UrlShortener.Services
 {
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Logging;
     using UrlShortener.Models;
     using UrlShortener.Repositories;
 
