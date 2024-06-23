@@ -1,4 +1,4 @@
-URL shortener
+URL Shortener
 ---
 
 3 Endpoints:
