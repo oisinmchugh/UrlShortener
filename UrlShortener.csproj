@@ -7,47 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="UrlTests\obj\Debug\net8.0\UrlTests.AssemblyInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="obj\Debug\net8.0\UrlShortener.AssemblyInfo.cs" />
-    <Compile Include="obj\Debug\net8.0\UrlShortener.MvcApplicationPartsAssemblyInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="obj\Debug\net8.0\staticwebassets.build.json" />
-    <Content Include="obj\Debug\net8.0\UrlShortener.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\net8.0\UrlShortener.sourcelink.json" />
-    <Content Include="obj\project.assets.json" />
-    <Content Include="obj\UrlShortener.csproj.nuget.dgspec.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="obj\Debug\net8.0\apphost.exe" />
-    <None Include="obj\Debug\net8.0\refint\UrlShortener.dll" />
-    <None Include="obj\Debug\net8.0\ref\UrlShortener.dll" />
-    <None Include="obj\Debug\net8.0\staticwebassets\msbuild.build.UrlShortener.props" />
-    <None Include="obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.UrlShortener.props" />
-    <None Include="obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.UrlShortener.props" />
-    <None Include="obj\Debug\net8.0\UrlShort.46B0166A.Up2Date" />
-    <None Include="obj\Debug\net8.0\UrlShortener.AssemblyInfoInputs.cache" />
-    <None Include="obj\Debug\net8.0\UrlShortener.assets.cache" />
-    <None Include="obj\Debug\net8.0\UrlShortener.csproj.AssemblyReference.cache" />
-    <None Include="obj\Debug\net8.0\UrlShortener.csproj.BuildWithSkipAnalyzers" />
-    <None Include="obj\Debug\net8.0\UrlShortener.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Debug\net8.0\UrlShortener.dll" />
-    <None Include="obj\Debug\net8.0\UrlShortener.GeneratedMSBuildEditorConfig.editorconfig" />
-    <None Include="obj\Debug\net8.0\UrlShortener.genruntimeconfig.cache" />
-    <None Include="obj\Debug\net8.0\UrlShortener.MvcApplicationPartsAssemblyInfo.cache" />
-    <None Include="obj\Debug\net8.0\UrlShortener.pdb" />
-    <None Include="obj\project.nuget.cache" />
-    <None Include="obj\UrlShortener.csproj.EntityFrameworkCore.targets" />
-    <None Include="obj\UrlShortener.csproj.nuget.g.props" />
-    <None Include="obj\UrlShortener.csproj.nuget.g.targets" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.6" />
