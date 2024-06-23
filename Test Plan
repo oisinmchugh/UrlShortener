@@ -16,6 +16,8 @@ test how different classes work together eg Services and Validation
 
 - Manual Tests could be defined on Test Rail
 
+- Automated UI tests using selenium or similar tool
+
 - Performance testing could be carried out 
 
 - Canary(staged release) Deployment could be implemented monitoring logs for errors
