@@ -43,7 +43,6 @@ namespace UrlShortener.Controllers
             var urlLegnth = fullUrl.Length;
             var shortUrlCode = fullUrl.Substring(urlLegnth -8, 8);   
 
-            //var shortenedUrl = fullUrl.TakeLast(8).ToString();
             var originalUrl = await _urlService.GetOriginalUrlFromShortenedAsync(shortUrlCode);
             if (originalUrl == null)
             {
