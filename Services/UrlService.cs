@@ -66,7 +66,7 @@
                 ShortenedUrl = shortenedUrl
             };
 
-            _urlRepository.Add(url);
+            await _urlRepository.Add(url);
 
             for (int attempt = 0; attempt < RetryLimit; attempt++)
             {
